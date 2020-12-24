@@ -1,0 +1,21 @@
+CX = g++
+
+PPFLAGS = $(CPPFLAGS)
+CXFLAGS = $(CXXFLAGS)
+
+CXFLAGS += -Wall -Wfatal-errors
+
+PPFLAGS += -std=c++17
+
+CXFLAGS += -m64
+LDFLAGS += -m64
+
+!hx = |> ^ HX %f^ $(CX) $(PPFLAGS) -x c++-header -c %f |> %f.gch
+!cx = |> ^ CX %f^ $(CX) $(PPFLAGS) $(CXFLAGS) -c -o %o %f |> %f.o
+!ld = |> ^ LD %o^ $(CX) $(LDFLAGS) %f -o %o |>
+
+LDFLAGS += -lwayland-client
+
+: foreach *.hh |> !hx |> {chds}
+: foreach *.cc | {chds} |> !cx |> {objs}
+: {objs} |> !ld |> z2q
