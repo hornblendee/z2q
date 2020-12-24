@@ -15,8 +15,7 @@ std::unique_ptr<vid> vid::make(void) {
 	//try {
 	//	return vid_x::make();
 	//} catch (const vid_x::…_error &_) {}
-	if (usedummy)
-	try {
+	if (usedummy) {
 		return vid_dummy::make();
 	}
 

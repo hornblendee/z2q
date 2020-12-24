@@ -2,7 +2,7 @@
 #include <stdexcept>
 #include <wayland-client.h>
 
-#include "vid"
+#include "vid.hh"
 #include "vid_wl.hh"
 #include "gl.hh"
 
